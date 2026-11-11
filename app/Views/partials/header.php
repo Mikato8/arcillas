@@ -38,18 +38,30 @@ $links = [
       <?php endforeach; ?>
     </nav>
     <div class="header-acciones">
-      <a class="boton boton--fantasma boton--sm" href="<?= url('/materiales') ?>"><?= icon('search') ?><span class="oculto-movil">Buscar</span></a>
-      <a class="boton boton--primario boton--sm" href="<?= url('/soy-comprador') ?>"><?= icon('file-text') ?> Cotizar</a>
+      <button class="header-buscar-movil" type="button" data-abrir-busqueda aria-label="Buscar minerales" aria-controls="nav-movil"><?= icon('search') ?></button>
+      <a class="boton boton--fantasma boton--sm header-buscar-escritorio" href="<?= url('/materiales') ?>"><?= icon('search') ?><span class="oculto-movil">Buscar</span></a>
+      <a class="boton boton--primario boton--sm header-cta" href="<?= url('/soy-comprador') ?>"><?= icon('file-text') ?> Cotizar</a>
       <button class="boton-menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-movil" data-menu-toggle>
-        <?= icon('menu') ?>
+        <span class="icono-menu"><?= icon('menu') ?></span>
+        <span class="icono-cerrar"><?= icon('x') ?></span>
       </button>
     </div>
   </div>
   <div class="nav-movil" id="nav-movil">
+    <form class="nav-movil__buscador" action="<?= url('/materiales') ?>" method="get" role="search">
+      <label for="busqueda-movil">Buscar en el directorio</label>
+      <div class="fila">
+        <input id="busqueda-movil" type="search" name="q" placeholder="Caolín, bentonita, cobre…" autocomplete="off" enterkeyhint="search">
+        <button class="boton boton--primario" type="submit" aria-label="Buscar"><?= icon('search') ?> Buscar</button>
+      </div>
+    </form>
     <?php foreach ($links as [$href, $label]): ?>
-      <a href="<?= url($href) ?>"><?= e($label) ?></a>
+      <a href="<?= url($href) ?>" data-menu-link><?= e($label) ?></a>
     <?php endforeach; ?>
-    <a href="<?= url('/soy-proveedor') ?>">Soy proveedor</a>
-    <a class="boton boton--primario" href="<?= url('/soy-comprador') ?>"><?= icon('file-text') ?> Solicitar cotización</a>
+    <a href="<?= url('/soy-proveedor') ?>" data-menu-link>Soy proveedor</a>
+    <div class="nav-movil__pie">
+      <a class="boton boton--primario" href="<?= url('/soy-comprador') ?>"><?= icon('file-text') ?> Solicitar cotización</a>
+      <a class="boton boton--contorno" href="<?= e(whatsapp_url('Hola, quiero información sobre minerales.')) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?> WhatsApp</a>
+    </div>
   </div>
 </header>

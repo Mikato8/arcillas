@@ -11,8 +11,8 @@ la instalación. No contiene contraseñas: las credenciales reales viven en
 | Plan | Hostinger Business Web Hosting (cuenta `u771496034`) |
 | Servidor | `45.93.101.150` |
 | SSH | puerto `65002`, usuario `u771496034` (clave/password) |
-| Dominio de preview | `floralwhite-meerkat-876567.hostingersite.com` |
-| Docroot | `~/domains/floralwhite-meerkat-876567.hostingersite.com/public_html` |
+| Dominio | `arcillas.mx` (DNS y SSL activos; verificado 2026-11-11) |
+| Docroot | `~/domains/arcillas.mx/public_html` |
 | PHP del servidor | 8.3.36 (CLI verificado) |
 | Base de datos | `u771496034_Arcillas` (MariaDB 11.8) |
 | Usuario MySQL | `u771496034_Arcillas` (solo localhost del servidor) |
@@ -102,15 +102,16 @@ Para activar SMTP:
 
 ## 5. Dominio `arcillas.mx`
 
-El sitio opera hoy en el hostname de preview. Para publicarlo en `arcillas.mx`:
+El dominio `arcillas.mx` ya está agregado en hPanel, su DNS resuelve a Hostinger y el
+SSL está activo: HTTP y `www` redirigen a `https://arcillas.mx`.
 
-1. Compra/agrega el dominio en hPanel y apunta los nameservers de Hostinger (o un
-   registro `A` a la IP del hosting).
-2. En hPanel → Sitios web → añade `arcillas.mx` y `www.arcillas.mx` al plan.
-3. Actualiza `APP_URL=https://arcillas.mx` en `.env.production` y redespliega.
-4. Emite el SSL (hPanel → SSL) y fuerza HTTPS; el `.htaccess` ya redirige `www` y HTTP.
-5. Verifica `https://arcillas.mx/robots.txt`, `sitemap.xml` y una ficha de material.
-6. Actualiza el `canonical`/OG (se generan con `APP_URL`).
+1. En hPanel → Sitios web, asocia `arcillas.mx` y `www.arcillas.mx` al plan (ya hecho).
+2. En el registrador del dominio (Registrar.eu) configura los nameservers de Hostinger
+   (`ns1.dns-parking.com` / `ns2.dns-parking.com`) o un registro `A`.
+3. Espera la propagación (puede tardar de minutos a horas).
+4. Emite/activa el SSL en hPanel → SSL; el `.htaccess` ya fuerza HTTPS y redirige `www`.
+5. Verifica `https://arcillas.mx/`, `/robots.txt`, `/sitemap.xml` y una ficha.
+6. `APP_URL` ya está en `https://arcillas.mx`; el canonical/OG se generan con ella.
 
 ### Nota sobre `robots.txt`
 

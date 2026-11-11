@@ -96,6 +96,11 @@ foreach (['al2o3_min' => 'Al₂O₃ ≥', 'fe2o3_max' => 'Fe₂O₃ ≤', 'blanc
 
       <div>
         <div class="resultados-cabecera">
+          <button class="boton boton--contorno boton--sm boton-filtros" type="button"
+                  data-filtros-toggle aria-expanded="false" aria-controls="panel-filtros">
+            <?= icon('filter') ?> Filtros
+            <?php if ($activos !== []): ?><span class="filtros-conteo"><?= count($activos) ?></span><?php endif; ?>
+          </button>
           <p><strong><?= num($resultado['total']) ?></strong> materiales encontrados<?= $resultado['paginas'] > 1 ? ' · página ' . $resultado['pagina'] . ' de ' . $resultado['paginas'] : '' ?></p>
           <form method="get" action="<?= url('/materiales') ?>" class="orden-select">
             <?php foreach ($filtros as $nombreFiltro => $valorFiltro): ?>

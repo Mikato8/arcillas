@@ -195,6 +195,8 @@ $urlBase = url('/materiales/' . $material['slug']);
   </aside>
 </div>
 
+<?php require APP_BASE . '/app/Views/partials/cta-movil.php'; ?>
+
 <?php if ($relacionados !== []): ?>
 <section class="seccion seccion--ajustada seccion--papel no-print">
   <div class="contenedor">

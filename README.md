@@ -11,8 +11,8 @@ de muestra/cotización), adaptado a un broker mexicano y con una capa diferencia
 
 | | |
 |---|---|
-| **Demo en producción** | <https://floralwhite-meerkat-876567.hostingersite.com> |
-| **Dominio previsto** | `https://arcillas.mx` (pendiente de apuntar DNS, ver despliegue) |
+| **Producción** | <https://arcillas.mx> (DNS ya apunta; SSL de Hostinger puede tardar unos minutos) |
+| **Dominio** | `arcillas.mx` (registrado; DNS y SSL en propagación) |
 | **Panel** | `/admin/login` |
 | **Admin demo** | `admin@arcillas.mx` · `ArcillasAdmin2026$` — **cambiar antes de operar** |
 | **Código** | <https://github.com/Mikato8/arcillas> |
@@ -38,9 +38,13 @@ de muestra/cotización), adaptado a un broker mexicano y con una capa diferencia
 |---|---|
 | ![Panel](docs/capturas/30-admin-dashboard.png) | ![Materiales](docs/capturas/31-admin-materiales.png) |
 
-| Móvil · portada |
-|---|
-| ![Móvil](docs/capturas/22-mobile-prod.png) |
+| Móvil · menú de tres barras con buscador | Móvil · catálogo con filtros colapsables |
+|---|---|
+| ![Menú móvil](docs/capturas/51-prod-mobile-menu.png) | ![Catálogo móvil](docs/capturas/52-prod-mobile-catalogo.png) |
+
+| Móvil · ficha con CTA fijo | Móvil · panel admin adaptable |
+|---|---|
+| ![Ficha móvil](docs/capturas/53-prod-mobile-ficha.png) | ![Admin móvil](docs/capturas/54-prod-mobile-admin.png) |
 
 ---
 
@@ -50,6 +54,10 @@ de muestra/cotización), adaptado a un broker mexicano y con una capa diferencia
 
 - **Portada** con propuesta de valor, buscador, industrias, materiales destacados,
   categorías, calculadoras, proceso de intermediación y CTAs.
+- **Experiencia móvil**: menú de tres barras con buscador integrado, botón de búsqueda
+  en la cabecera, filtros colapsables en el catálogo, barra fija de cotización/muestra
+  en las fichas, formularios a una columna con inputs de 16 px (sin zoom en iOS) y
+  panel admin con navegación adaptable.
 - **Directorio de materiales** (`/materiales`) con buscador facetado: palabra clave,
   categoría, industria, disponibilidad y rangos de propiedades técnicas
   (Al₂O₃ mínimo, Fe₂O₃ máximo, blancura mínima, humedad máxima, pH, MBI, D50).
@@ -170,8 +178,9 @@ php -l app/Controllers/HomeController.php
 
 ## Despliegue
 
-Ya está desplegado en Hostinger (PHP 8.3, MariaDB 11.8) detrás de
-`floralwhite-meerkat-876567.hostingersite.com`. Guía completa, credenciales de
+Ya está desplegado en Hostinger (PHP 8.3, MariaDB 11.8) en `arcillas.mx`.
+El hostname de preview anterior (`floralwhite-meerkat-876567.hostingersite.com`) fue
+sustituido por el dominio propio en hPanel. Guía completa, credenciales de
 referencia, pasos SSH/rsync, correo SMTP, dominio y solución de problemas en
 [`docs/despliegue-hostinger.md`](docs/despliegue-hostinger.md).
 
@@ -186,8 +195,8 @@ Checklist de seguridad y resultados de pruebas: [`docs/seguridad.md`](docs/segur
 ### Pendientes para operar (no bloquean la demo)
 
 1. **Cambiar contraseña del admin demo** y crear usuarios reales.
-2. **Apuntar `arcillas.mx`** al hosting y actualizar `APP_URL` (hoy apunta al dominio de
-   preview para que assets/canonical funcionen).
+2. **Terminar la configuración DNS/SSL de `arcillas.mx`** (el dominio ya apunta a Hostinger;
+   falta propagación y certificado). `APP_URL` ya está configurado a `https://arcillas.mx`.
 3. **Crear el buzón `contacto@arcillas.mx`** y pasar `MAIL_DRIVER=smtp` con su contraseña.
 4. **Sustituir el catálogo demo** por materiales y proveedores reales (ver
    [`docs/datos-fuentes.md`](docs/datos-fuentes.md)).

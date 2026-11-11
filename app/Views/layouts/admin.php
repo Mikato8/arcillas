@@ -73,6 +73,10 @@ $activo = static function (string $base) use ($ruta): string {
           <?php if (App\Core\Auth::is('admin')): ?>
             <a class="boton boton--contorno boton--sm" href="<?= url('/admin/materiales/nuevo') ?>"><?= icon('plus') ?> Nuevo material</a>
           <?php endif; ?>
+          <form method="post" action="<?= url('/admin/logout') ?>" class="admin-salir-movil" style="margin:0">
+            <?= csrf_field() ?>
+            <button class="boton boton--contorno boton--sm" type="submit" aria-label="Cerrar sesión"><?= icon('logout') ?> Salir</button>
+          </form>
         </div>
       </header>
       <div class="admin-contenido">

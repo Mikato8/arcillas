@@ -20,15 +20,74 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // ── Menú móvil ───────────────────────────────────────────────────────
+  // ── Menú móvil (tres barras) con buscador integrado ──────────────────
   const menuBtn = $('[data-menu-toggle]');
   const menu = $('#nav-movil');
+  const btnBuscarMovil = $('[data-abrir-busqueda]');
+
+  const abrirMenu = (enfocarBuscador = false) => {
+    if (!menu || !menuBtn) return;
+    menu.classList.add('is-abierto');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuBtn.setAttribute('aria-label', 'Cerrar menú');
+    document.body.classList.add('menu-abierto');
+    if (enfocarBuscador) {
+      const input = $('#busqueda-movil');
+      if (input) {
+        setTimeout(() => {
+          input.focus({ preventScroll: true });
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 120);
+      }
+    }
+  };
+
+  const cerrarMenu = () => {
+    if (!menu || !menuBtn) return;
+    menu.classList.remove('is-abierto');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Abrir menú');
+    document.body.classList.remove('menu-abierto');
+  };
+
   if (menuBtn && menu) {
     menuBtn.addEventListener('click', () => {
-      const abierto = menu.classList.toggle('is-abierto');
-      menuBtn.setAttribute('aria-expanded', String(abierto));
+      menu.classList.contains('is-abierto') ? cerrarMenu() : abrirMenu(false);
+    });
+    btnBuscarMovil?.addEventListener('click', () => abrirMenu(true));
+    $$('[data-menu-link]').forEach((enlace) => enlace.addEventListener('click', cerrarMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') cerrarMenu();
+    });
+    document.addEventListener('click', (event) => {
+      if (!menu.classList.contains('is-abierto')) return;
+      if (menu.contains(event.target) || menuBtn.contains(event.target) || btnBuscarMovil?.contains(event.target)) return;
+      cerrarMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860) cerrarMenu();
     });
   }
+
+  // ── Filtros colapsables en el catálogo móvil ────────────────────────
+  const layoutBusqueda = $('.layout-busqueda');
+  const toggleFiltros = $('[data-filtros-toggle]');
+  if (layoutBusqueda && toggleFiltros) {
+    if (window.matchMedia('(max-width: 860px)').matches) {
+      layoutBusqueda.classList.add('filtros-colapsados');
+    }
+    toggleFiltros.addEventListener('click', () => {
+      const abierto = layoutBusqueda.classList.toggle('filtros-abiertos');
+      toggleFiltros.setAttribute('aria-expanded', String(abierto));
+      if (abierto) {
+        const panel = $('#panel-filtros');
+        panel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  // ── Barra fija de conversión en fichas (móvil) ──────────────────────
+  if ($('.cta-movil')) document.body.classList.add('tiene-cta-movil');
 
   // ── Selects que se envían solos ──────────────────────────────────────
   $$('[data-auto-enviar]').forEach((select) => {

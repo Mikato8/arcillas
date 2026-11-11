@@ -403,3 +403,28 @@ if (!function_exists('calculadoras_relacionadas')) {
         return array_slice(array_values($out), 0, 3);
     }
 }
+
+if (!function_exists('es_movil')) {
+    /** Detección simple de dispositivo móvil por User-Agent (solo para UI). */
+    function es_movil(): bool
+    {
+        $ua = strtolower((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''));
+        return $ua !== '' && preg_match('/android|iphone|ipad|ipod|mobile|opera mini|iemobile/', $ua) === 1;
+    }
+}
+
+if (!function_exists('ocultar_whatsapp_flotante')) {
+    /** Oculta el botón flotante en pantallas con formularios para no tapar campos. */
+    function ocultar_whatsapp_flotante(): bool
+    {
+        if (!es_movil()) {
+            return false;
+        }
+        $ruta = \App\Core\Request::path();
+        if (preg_match('#^/(calculadoras|contacto|soy-comprador|soy-proveedor|solicitud|admin)#', $ruta) === 1) {
+            return true;
+        }
+        // Ficha de material: la barra fija ya ofrece cotizar/muestra.
+        return preg_match('#^/materiales/[^/]+$#', $ruta) === 1;
+    }
+}

@@ -13,7 +13,7 @@ $jsonLd = $meta['json_ld'] ?? [];
 <html lang="es-MX">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title><?= e($titulo) ?></title>
   <meta name="description" content="<?= e($descripcion) ?>">
   <link rel="canonical" href="<?= e($canonical) ?>">
@@ -44,10 +44,12 @@ $jsonLd = $meta['json_ld'] ?? [];
     <?= $content ?>
   </main>
   <?php require APP_BASE . '/app/Views/partials/footer.php'; ?>
+  <?php if (!ocultar_whatsapp_flotante()): ?>
   <a class="boton-flotante-wa" href="<?= e(whatsapp_url('Hola, quiero información sobre arcillas y minerales.')) ?>"
      target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
     <?= icon('whatsapp') ?>
   </a>
+  <?php endif; ?>
   <script src="<?= asset('js/app.js') ?>" defer></script>
 </body>
 </html>

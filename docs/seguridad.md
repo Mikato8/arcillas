@@ -23,7 +23,7 @@
 ## 2. Evidencia de pruebas (2026-11-11)
 
 Verificado sobre la instancia de producción
-`https://floralwhite-meerkat-876567.hostingersite.com` y el servidor local:
+`https://arcillas.mx` y el servidor local:
 
 - [x] Portada, catálogo, ficha, calculadoras, industrias, proveedores, contacto y legal → **200**.
 - [x] Slugs inexistentes (`/no-existe`, `/calculadoras/no-existe`) → **404** personalizado.
