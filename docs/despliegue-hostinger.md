@@ -112,6 +112,15 @@ El sitio opera hoy en el hostname de preview. Para publicarlo en `arcillas.mx`:
 5. Verifica `https://arcillas.mx/robots.txt`, `sitemap.xml` y una ficha de material.
 6. Actualiza el `canonical`/OG (se generan con `APP_URL`).
 
+### Nota sobre `robots.txt`
+
+Hostinger sirve su propio `/robots.txt` desde el edge (hcdn) mientras el sitio está en
+el hostname de preview: actualmente responde `User-agent: Googlebot / Disallow: /`, por
+encima del `robots.txt` dinámico de la aplicación (`PageController::robots`). Antes de
+publicar, activa la visibilidad en buscadores en hPanel (Sitio web → Avanzado/SEO) y
+verifica con `curl -s https://arcillas.mx/robots.txt`; debe mostrar `Allow: /`,
+`Disallow: /admin` y la línea `Sitemap:`. El `sitemap.xml` sí lo genera la app.
+
 ## 6. Verificación posterior al despliegue
 
 ```bash

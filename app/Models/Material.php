@@ -80,11 +80,13 @@ final class Material
 
         $texto = trim((string) ($filtros['q'] ?? ''));
         if ($texto !== '') {
-            $where[] = '(m.nombre LIKE :q OR m.resumen LIKE :q OR m.descripcion LIKE :q OR m.aplicaciones LIKE :q
-                        OR c.nombre LIKE :q
+            $where[] = '(m.nombre LIKE :q1 OR m.resumen LIKE :q2 OR m.descripcion LIKE :q3 OR m.aplicaciones LIKE :q4
+                        OR c.nombre LIKE :q5
                         OR EXISTS (SELECT 1 FROM material_properties p
-                                   WHERE p.material_id = m.id AND (p.valor_texto LIKE :q OR p.nombre LIKE :q)))';
-            $params['q'] = '%' . $texto . '%';
+                                   WHERE p.material_id = m.id AND (p.valor_texto LIKE :q6 OR p.nombre LIKE :q7)))';
+            foreach (range(1, 7) as $i) {
+                $params['q' . $i] = '%' . $texto . '%';
+            }
         }
 
         if (!empty($filtros['categoria'])) {

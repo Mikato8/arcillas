@@ -153,8 +153,10 @@ final class Lead
             $params['estado'] = (string) $filtros['estado'];
         }
         if (!empty($filtros['q'])) {
-            $where[] = '(l.nombre LIKE :q OR l.empresa LIKE :q OR l.email LIKE :q OR l.material_texto LIKE :q)';
-            $params['q'] = '%' . trim((string) $filtros['q']) . '%';
+            $where[] = '(l.nombre LIKE :q1 OR l.empresa LIKE :q2 OR l.email LIKE :q3 OR l.material_texto LIKE :q4)';
+            foreach (range(1, 4) as $i) {
+                $params['q' . $i] = '%' . trim((string) $filtros['q']) . '%';
+            }
         }
         if (!empty($filtros['desde'])) {
             $where[] = 'l.creado_en >= :desde';

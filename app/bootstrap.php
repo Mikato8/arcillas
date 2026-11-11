@@ -14,7 +14,7 @@ use App\Core\Session;
 use App\Core\View;
 
 define('APP_BASE', dirname(__DIR__));
-define('APP_VERSION', '1.0.5');
+define('APP_VERSION', '1.0.6');
 define('APP_STORAGE', APP_BASE . '/storage');
 define('APP_PUBLIC', is_dir(APP_BASE . '/public') ? APP_BASE . '/public' : APP_BASE);
 define('APP_CLI', PHP_SAPI === 'cli');

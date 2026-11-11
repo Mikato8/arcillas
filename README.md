@@ -178,6 +178,7 @@ referencia, pasos SSH/rsync, correo SMTP, dominio y solución de problemas en
 ```bash
 ./tools/deploy.sh          # rsync + .env + permisos + verificación de BD
 ./tools/deploy.sh --status # conteos de la BD remota
+./tools/smoke.sh           # prueba 30 rutas, protecciones, sitemap y calculadora
 ```
 
 Checklist de seguridad y resultados de pruebas: [`docs/seguridad.md`](docs/seguridad.md).
