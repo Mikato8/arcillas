@@ -73,6 +73,8 @@ de muestra/cotización), adaptado a un broker mexicano y con una capa diferencia
   (oferta), solicitud de cotización y solicitud múltiple de muestras.
 - **Legal**: aviso de privacidad LFPDPPP base y términos y condiciones (con nota de
   revisión legal), 404/500/403 personalizadas, `robots.txt` y `sitemap.xml` dinámicos.
+- **Correo transaccional**: notificación interna y acuse al interesado por SMTP de
+  Hostinger (TLS), con alternativa texto/HTML; SPF, DKIM y DMARC pasan en la entrega.
 - **SEO**: títulos y meta únicos, canonical, Open Graph/Twitter Cards, Schema.org
   (Organization, Product), URLs amigables, lazy loading, HTTPS y redirección www.
 
@@ -195,13 +197,12 @@ Checklist de seguridad y resultados de pruebas: [`docs/seguridad.md`](docs/segur
 ### Pendientes para operar (no bloquean la demo)
 
 1. **Cambiar contraseña del admin demo** y crear usuarios reales.
-2. **Terminar la configuración DNS/SSL de `arcillas.mx`** (el dominio ya apunta a Hostinger;
-   falta propagación y certificado). `APP_URL` ya está configurado a `https://arcillas.mx`.
-3. **Crear el buzón `contacto@arcillas.mx`** y pasar `MAIL_DRIVER=smtp` con su contraseña.
-4. **Sustituir el catálogo demo** por materiales y proveedores reales (ver
+2. **Sustituir el catálogo demo** por materiales y proveedores reales (ver
    [`docs/datos-fuentes.md`](docs/datos-fuentes.md)).
-5. **Revisión legal** del aviso de privacidad y términos (marcadores entre corchetes).
-6. Respaldos automáticos de la base y del directorio `public/uploads`.
+3. **Revisión legal** del aviso de privacidad y términos (marcadores entre corchetes).
+4. Respaldos automáticos de la base y del directorio `public/uploads`.
+5. Opcional: endurecer DMARC de `p=none` a `p=quarantine` cuando la operación esté estable.
+6. Opcional: 2FA para el panel administrativo.
 
 ---
 

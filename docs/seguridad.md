@@ -17,7 +17,7 @@
 | Errores | `APP_DEBUG=false` en producción, mensajes genéricos al usuario y detalle en `storage/logs/app-*.log` |
 | Bitácora | tabla `logs` con usuario/acción/entidad/IP; login/logout y cambios de catálogo y leads |
 | Legal | consentimiento explícito obligatorio, aviso de privacidad LFPDPPP base y enlaces en formularios |
-| Correo | SMTP con TLS (puerto 465), credenciales en `.env` (nunca en BD); modo `log` si no hay buzón |
+| Correo | SMTP activo con TLS (puerto 465) en el buzón `contacto@arcillas.mx`; credenciales en `.env` (nunca en BD ni en Git); cabeceras `Auto-Submitted` y alternativa texto/HTML |
 | Base de datos | usuario de BD dedicado, sin acceso público; `.env` con permisos 600 |
 
 ## 2. Evidencia de pruebas (2026-11-11)
@@ -45,7 +45,8 @@ Verificado sobre la instancia de producción
 - [ ] Crear usuarios reales con rol mínimo necesario; desactivar los que no se usen.
 - [ ] Revisar y sustituir los datos DEMO de proveedores, materiales y precios.
 - [ ] Revisión legal del aviso de privacidad y términos (marcadores `[ ]`).
-- [ ] Crear buzón `contacto@arcillas.mx`, activar SMTP y probar entrega real + SPF/DKIM.
+- [x] Buzón `contacto@arcillas.mx` y SMTP activos, con entrega real verificada y SPF/DKIM.
+- [ ] Opcional: endurecer DMARC a `p=quarantine` y revisar reportes.
 - [ ] Apuntar `arcillas.mx`, actualizar `APP_URL`, emitir SSL y verificar redirecciones.
 - [ ] Programar respaldos de base y de `public/uploads`; probar restauración.
 - [ ] Configurar rotación/limpieza de `storage/logs` y `storage/cache`.
@@ -60,6 +61,7 @@ Verificado sobre la instancia de producción
 2. **Sin WAF propio**: se depende de las protecciones de Hostinger y del rate limit en
    archivos; tráfico distribuido podría saturar formularios.
 3. **Rate limit por archivo**: usa `storage/cache`; en clústeres no se comparte.
-4. **Modo `log` de correo**: no envía notificaciones reales hasta configurar SMTP.
+4. **DMARC en `p=none`**: SPF y DKIM ya pasan; conviene endurecer la política cuando la
+   operación esté estable y revisar reportes agregados.
 5. **Datos demo**: el catálogo público actual es de demostración, no una oferta comercial.
 6. **Aviso legal base**: requiere validación por abogado antes de su publicación definitiva.

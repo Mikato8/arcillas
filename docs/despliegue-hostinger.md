@@ -86,19 +86,29 @@ php tools/migrate.php --status
 - El esquema es idempotente (`CREATE TABLE IF NOT EXISTS`). El catálogo se puede
   regenerar con `php tools/generar_seed_sql.php` y `database/seed.sql` es portable.
 
-## 4. Correo
+## 4. Correo (activo)
 
-Estado actual: `MAIL_DRIVER=log`. Los correos (notificación interna y acuse al
-interesado) se guardan en `storage/logs/mail.log`; **los leads sí se guardan en MySQL**
-aunque el correo no salga.
+El buzón `contacto@arcillas.mx` está configurado y el sitio envía por SMTP de Hostinger:
 
-Para activar SMTP:
+```dotenv
+MAIL_DRIVER=smtp
+SMTP_HOST=smtp.hostinger.com
+SMTP_PORT=465
+SMTP_SECURE=ssl
+SMTP_USER=contacto@arcillas.mx
+SMTP_PASS=<contraseña del buzón, solo en .env>
+MAIL_TO=contacto@arcillas.mx
+```
 
-1. Crea el buzón `contacto@arcillas.mx` en hPanel → Correos.
-2. En `.env`: `MAIL_DRIVER=smtp`, `SMTP_PASS=<contraseña del buzón>`.
-3. Verifica `SMTP_HOST=smtp.hostinger.com`, `SMTP_PORT=465`, `SMTP_SECURE=ssl`.
-4. Configura SPF/DKIM en DNS (hPanel lo hace al crear el buzón).
-5. Prueba un formulario y revisa que llegue a `MAIL_TO`.
+- Notificación interna y acuse al interesado salen con alternativa texto/HTML.
+- Verificado el 2026-11-11: ambos correos llegan a INBOX y las cabeceras muestran
+  `spf=pass`, `dkim=pass (selector hostingermail-a)` y `dmarc=pass (p=none)`.
+- Los leads se guardan en MySQL aunque el correo falle; los errores SMTP quedan en
+  `storage/logs/app-*.log` y los envíos correctos se registran como `SMTP enviado`.
+
+Rotación de contraseña: cámbiala en hPanel → Correos, actualiza `SMTP_PASS` en
+`.env.production`, redespliega y verifica un formulario. Si el buzón se desactiva,
+el sitio sigue capturando leads (puedes volver temporalmente a `MAIL_DRIVER=log`).
 
 ## 5. Dominio `arcillas.mx`
 
@@ -145,7 +155,7 @@ rutas internas. El login de admin debe redirigir a `/admin` y el dashboard respo
 | Todo da 404 | docroot incorrecto o falta `index.php` | confirmar `REMOTE_DIR` y que exista `index.php` |
 | Error 500 | excepción PHP / BD inaccesible | revisar `storage/logs/app-*.log`; poner `APP_DEBUG=true` temporalmente |
 | Fichas sin imágenes | faltan permisos en `public/uploads` | `chmod -R 775 public/uploads` |
-| Correos no llegan | `MAIL_DRIVER=log` o SMTP mal configurado | revisar `storage/logs/mail.log`, credenciales del buzón y SPF |
+| Correos no llegan | SMTP mal configurado o buzón desactivado | revisar `storage/logs/app-*.log`, credenciales y que el buzón exista |
 | Cambios no se ven | caché de assets (`?v=APP_VERSION`) | subir `APP_VERSION` y redesplegar |
 | Login bloqueado | rate limit de 8 intentos/15 min | esperar o borrar `storage/cache/rl-login-*.json` |
 | BD vacía tras migrar | se ejecutó `--fresh` sin `--seed` | `php database/seed.php --force` |

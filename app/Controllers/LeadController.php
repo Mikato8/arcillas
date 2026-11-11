@@ -227,7 +227,7 @@ final class LeadController extends Controller
         $to = (string) \App\Core\Env::get('MAIL_TO', (string) setting('empresa_email', 'contacto@arcillas.mx'));
         Mailer::enviar(
             $to,
-            '[' . empresa_corto() . '] ' . tipo_lead_label($tipo) . ' · ' . (string) $datos['empresa'],
+            'Nuevo lead de ' . mb_strtolower(tipo_lead_label($tipo)) . ' · ' . (string) ($datos['empresa'] ?: $datos['nombre']) . ' · Arcillas MX',
             Mailer::plantilla('Nueva solicitud de ' . tipo_lead_label($tipo), 'Se recibió una solicitud desde el sitio web.', $filas, 'Abrir bandeja', url('/admin/leads')),
             (string) $datos['email'],
             (string) $datos['nombre']

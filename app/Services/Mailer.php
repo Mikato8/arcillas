@@ -65,25 +65,40 @@ final class Mailer
             self::comando($socket, 'RCPT TO:<' . $to . '>', [250, 251]);
             self::comando($socket, 'DATA', [354]);
 
+            $frontera = '=_arcillas_' . bin2hex(random_bytes(8));
+            $texto = self::textoPlano($html);
+
             $headers = [
                 'Date: ' . date('r'),
                 'From: ' . $fromNameEnc . ' <' . $from . '>',
                 'To: <' . $to . '>',
                 'Subject: ' . self::encodeHeader($asunto),
                 'Message-ID: <' . bin2hex(random_bytes(12)) . '@arcillas.mx>',
+                'X-Mailer: ArcillasMX/1.0',
+                'Auto-Submitted: auto-generated',
+                'X-Auto-Response-Suppress: All',
                 'MIME-Version: 1.0',
-                'Content-Type: text/html; charset=UTF-8',
-                'Content-Transfer-Encoding: base64',
+                'Content-Type: multipart/alternative; boundary="' . $frontera . '"',
             ];
             if ($replyToEmail !== null && filter_var($replyToEmail, FILTER_VALIDATE_EMAIL)) {
                 $headers[] = 'Reply-To: ' . ($replyToNombre !== null ? self::encodeHeader($replyToNombre) . ' ' : '') . '<' . $replyToEmail . '>';
             }
 
-            $cuerpo = chunk_split(base64_encode($html), 76, "\r\n");
+            $cuerpo = '--' . $frontera . "\r\n"
+                . "Content-Type: text/plain; charset=UTF-8\r\n"
+                . "Content-Transfer-Encoding: base64\r\n\r\n"
+                . chunk_split(base64_encode($texto), 76, "\r\n")
+                . '--' . $frontera . "\r\n"
+                . "Content-Type: text/html; charset=UTF-8\r\n"
+                . "Content-Transfer-Encoding: base64\r\n\r\n"
+                . chunk_split(base64_encode($html), 76, "\r\n")
+                . '--' . $frontera . "--\r\n";
+
             fwrite($socket, implode("\r\n", $headers) . "\r\n\r\n" . $cuerpo . "\r\n.\r\n");
             self::esperar($socket, [250]);
             self::comando($socket, 'QUIT', [221], false);
             fclose($socket);
+            Logger::info('SMTP enviado', ['to' => $to, 'asunto' => $asunto]);
             return true;
         } catch (\Throwable $e) {
             Logger::error('SMTP: ' . $e->getMessage(), ['to' => $to, 'asunto' => $asunto]);
@@ -131,6 +146,17 @@ final class Mailer
         if (!in_array($codigo, $esperados, true)) {
             throw new \RuntimeException('Respuesta SMTP inesperada: ' . trim($respuesta));
         }
+    }
+
+    /** Convierte el HTML del correo en una alternativa de texto plano. */
+    private static function textoPlano(string $html): string
+    {
+        $texto = preg_replace('#<(br|/p|/tr|/h[1-6])[^>]*>#i', "\n", $html) ?? $html;
+        $texto = str_replace(['</td>', '</th>'], ' · ', $texto);
+        $texto = html_entity_decode(strip_tags($texto), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $texto = preg_replace("/[ \t]+/", ' ', $texto) ?? $texto;
+        $texto = preg_replace("/\n{3,}/", "\n\n", $texto) ?? $texto;
+        return trim($texto);
     }
 
     private static function encodeHeader(string $texto): string
