@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+  <g fill="none" stroke="#f7f5f0" stroke-opacity=".16">
+    <path stroke-width="1.2" d="M-80 710C140 640 290 690 470 730s340 50 520-10 350-90 560-40"/>
+    <path stroke-width=".9" d="M-80 650C160 580 300 630 480 668s350 44 530-14 340-84 540-34"/>
+    <path stroke-width=".7" d="M-80 590C150 530 320 566 500 604s330 40 510-16 330-78 530-28"/>
+    <path stroke-width=".55" d="M-80 530C140 480 310 510 490 548s340 36 520-18 330-72 530-22"/>
+  </g>
+  <g fill="none" stroke="#c69a76" stroke-opacity=".12">
+    <path stroke-width="1" d="M-80 250C160 190 330 230 520 270s360 40 540-16 300-60 460-20"/>
+    <path stroke-width=".7" d="M-80 190C160 140 340 176 530 212s350 36 530-18 290-54 450-14"/>
+    <path stroke-width=".5" d="M-80 130C170 90 340 120 540 154s350 30 530-20 290-48 450-8"/>
+  </g>
+  <g fill="#ffffff" fill-opacity=".05">
+    <circle cx="220" cy="360" r="130"/>
+    <circle cx="1120" cy="300" r="170"/>
+    <circle cx="760" cy="700" r="120"/>
+  </g>
+</svg>

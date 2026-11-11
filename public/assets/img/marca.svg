@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Arcillas MX">
+  <rect width="48" height="48" rx="12" fill="#2b2621"/>
+  <path d="M8 30c6-5 11-5 16-2s11 3 16-1v13H8V30Z" fill="#8b5e3c"/>
+  <path d="M8 24c6-5 11-5 16-2s11 3 16-1v6c-5 4-11 4-16 1s-10-3-16 2v-6Z" fill="#556b2f"/>
+  <path d="M8 17c6-5 11-5 16-2s11 3 16-1v5c-5 4-11 4-16 1s-10-3-16 2v-5Z" fill="#c69a76"/>
+  <path d="M31 10.5 37 21h-4.2l-1.2-2.6h-3.2L27.2 21H23l6-10.5h2Zm-3 5.1h2l-.9-2Z" fill="#f7f5f0"/>
+</svg>

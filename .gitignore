@@ -1,0 +1,31 @@
+# Dependencias y artefactos
+/vendor/
+/node_modules/
+/.idea/
+/.vscode/
+.DS_Store
+
+# Configuración y secretos
+.env
+.env.local
+.env.production
+.deploy.env
+*.pem
+
+# Logs y temporales
+storage/logs/*.log
+storage/cache/*
+!storage/cache/.gitkeep
+storage/uploads/*
+!storage/uploads/.gitkeep
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/materiales/
+public/uploads/materiales/*
+!public/uploads/materiales/.gitkeep
+.tmp*
+capturas/**
+
+# Base de datos volcada
+database/*.dump
+database/*.sql.gz
