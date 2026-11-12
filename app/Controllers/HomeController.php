@@ -64,7 +64,8 @@ final class HomeController extends Controller
             'address'  => [
                 '@type'           => 'PostalAddress',
                 'addressCountry'  => 'MX',
-                'addressLocality' => (string) setting('empresa_ciudad', 'Ciudad de México'),
+                'addressRegion'   => 'Jalisco',
+                'addressLocality' => (string) setting('empresa_ciudad', 'Guadalajara, Jalisco'),
             ],
             'sameAs' => array_values(array_filter([
                 (string) setting('empresa_linkedin', ''),

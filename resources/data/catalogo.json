@@ -6909,7 +6909,7 @@
         },
         {
             "clave": "sitio_direccion",
-            "valor": "Ciudad de México, México",
+            "valor": "Guadalajara, Jalisco, México",
             "grupo": "contacto",
             "etiqueta": "Dirección",
             "tipo": "texto"

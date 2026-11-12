@@ -13,7 +13,7 @@ $links = [
 <div class="barra-superior">
   <div class="contenedor">
     <div class="barra-superior__grupo barra-superior__grupo--secundario">
-      <span><?= icon('pin') ?> <?= e(setting('empresa_ciudad', 'Ciudad de México, México')) ?></span>
+      <span><?= icon('pin') ?> <?= e(setting('empresa_ciudad', 'Guadalajara, Jalisco')) ?></span>
       <span><?= icon('clock') ?> Respuesta en <?= e(setting('respuesta_horas', '24')) ?> h hábiles</span>
     </div>
     <div class="barra-superior__grupo">

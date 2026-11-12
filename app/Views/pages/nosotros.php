@@ -22,7 +22,7 @@
           <p><strong><?= e(empresa_nombre()) ?></strong><br>
           RFC <?= e(setting('empresa_rfc', 'APD200702M63')) ?><br>
           Régimen fiscal: RESICO Personas Morales<br>
-          <?= e(setting('empresa_direccion', 'Ciudad de México, México')) ?></p>
+          <?= e(setting('empresa_direccion', 'Guadalajara, Jalisco, México')) ?></p>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:1rem">
