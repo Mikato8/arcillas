@@ -70,6 +70,7 @@ final class HomeController extends Controller
             'sameAs' => array_values(array_filter([
                 (string) setting('empresa_linkedin', ''),
                 (string) setting('empresa_google', ''),
+                (string) setting('empresa_facebook', ''),
             ])),
         ];
     }

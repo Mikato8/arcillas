@@ -331,6 +331,7 @@ if (!function_exists('icon')) {
             'filter'       => '<path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z"/>',
             'globe'        => '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 5.6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.6-3.8-9S9.5 5.5 12 3Z"/>',
             'chart'        => '<path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-5"/><path d="M13 16V7"/><path d="M18 16v-8"/>',
+            'facebook'     => '<path d="M15 21v-7h2.6l.4-3H15V9.2c0-.9.3-1.2 1.2-1.2H18V5.2c-.3 0-1.3-.2-2.4-.2-2.3 0-3.6 1.3-3.6 3.9V11H9v3h3v7"/>',
         ];
         $path = $icons[$name] ?? $icons['info'];
         return '<svg class="icon ' . e($class) . '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $path . '</svg>';

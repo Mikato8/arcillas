@@ -27,6 +27,7 @@ final class Settings
         'empresa_ciudad'     => 'Guadalajara, Jalisco',
         'empresa_linkedin'   => '',
         'empresa_google'     => 'https://share.google/b0zPLsZ8jtnF3UWAT',
+        'empresa_facebook'   => 'https://www.facebook.com/profile.php?id=61596741170224',
         'hero_titulo'        => '',
         'hero_subtitulo'     => '',
         'hero_etiqueta'      => 'Broker técnico de minerales · México',

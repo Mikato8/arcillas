@@ -47,6 +47,9 @@ $anio = date('Y');
           <?php if (($google = trim((string) setting('empresa_google', ''))) !== ''): ?>
             <li><?= icon('globe') ?><a href="<?= e($google) ?>" target="_blank" rel="noopener">Perfil en Google</a></li>
           <?php endif; ?>
+          <?php if (($facebook = trim((string) setting('empresa_facebook', ''))) !== ''): ?>
+            <li><?= icon('facebook') ?><a href="<?= e($facebook) ?>" target="_blank" rel="noopener">Facebook</a></li>
+          <?php endif; ?>
         </ul>
       </div>
     </div>

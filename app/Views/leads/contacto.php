@@ -70,6 +70,9 @@ $msg = static fn (string $k): string => isset($errores[$k]) ? '<span class="mens
             <?php if (($google = trim((string) setting('empresa_google', ''))) !== ''): ?>
               <li class="fila" style="gap:.6rem"><?= icon('globe') ?><a href="<?= e($google) ?>" target="_blank" rel="noopener">Ver perfil y reseñas en Google</a></li>
             <?php endif; ?>
+            <?php if (($facebook = trim((string) setting('empresa_facebook', ''))) !== ''): ?>
+              <li class="fila" style="gap:.6rem"><?= icon('facebook') ?><a href="<?= e($facebook) ?>" target="_blank" rel="noopener">Síguenos en Facebook</a></li>
+            <?php endif; ?>
           </ul>
         </div>
         <div class="tarjeta" style="padding:1.4rem;background:#f2eee4">
