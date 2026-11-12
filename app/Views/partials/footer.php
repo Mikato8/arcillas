@@ -44,6 +44,9 @@ $anio = date('Y');
           <li><?= icon('phone') ?><a href="tel:<?= e(preg_replace('/\s+/', '', (string) setting('empresa_telefono', ''))) ?>"><?= e(setting('empresa_telefono', '+52 55 0000 0000')) ?></a></li>
           <li><?= icon('whatsapp') ?><a href="<?= e(whatsapp_url('Hola, quiero información.')) ?>" target="_blank" rel="noopener">WhatsApp directo</a></li>
           <li><?= icon('pin') ?><span><?= e(setting('empresa_direccion', 'Ciudad de México, México')) ?></span></li>
+          <?php if (($google = trim((string) setting('empresa_google', ''))) !== ''): ?>
+            <li><?= icon('globe') ?><a href="<?= e($google) ?>" target="_blank" rel="noopener">Perfil en Google</a></li>
+          <?php endif; ?>
         </ul>
       </div>
     </div>

@@ -26,6 +26,7 @@ final class ConfigController extends AdminController
             'empresa_direccion' => ['Dirección', 'texto'],
             'empresa_ciudad'   => ['Ciudad', 'texto'],
             'empresa_linkedin' => ['LinkedIn', 'url'],
+            'empresa_google'   => ['Perfil de Google (reseñas/mapa)', 'url'],
         ],
         'Portada' => [
             'hero_titulo'    => ['Título del hero', 'texto'],

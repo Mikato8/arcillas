@@ -6895,14 +6895,14 @@
         },
         {
             "clave": "sitio_telefono",
-            "valor": "+52 55 0000 0000",
+            "valor": "+52 33 1713 5769",
             "grupo": "contacto",
             "etiqueta": "Teléfono",
             "tipo": "texto"
         },
         {
             "clave": "sitio_whatsapp",
-            "valor": "525500000000",
+            "valor": "523317135769",
             "grupo": "contacto",
             "etiqueta": "WhatsApp (solo dígitos)",
             "tipo": "texto"
